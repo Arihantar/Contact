@@ -1,0 +1,128 @@
+<p id="notice"></p>
+<div class="alert-message block-message info">
+	<h3>Client Details</h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Phone</th>
+			<th>Address</th>
+			<th>Email</th>
+			<th>Date</th>
+			<th>Link</th>
+		</tr>
+		<tr>
+			<td class="span3"> <%= @client.salutaion %> <%= @client.name %>
+			<br />
+			</td>
+			<td class="span6"> <%@client.contact_infos.where(:nature => "Phone Number",:client_id =>@client.id).each do |info| %> <b><%= info.display_name %></b> (<%= info.data %>)<%= link_to "Delete", info, :class=>"btn", :confirm => 'Are you sure?',:method => :delete %>
+			<br />
+			<%end%> </td>
+			<td class="span3"> <%@client.contact_infos.where(:nature => "Address",:client_id =>@client.id).each do |info| %> <b><%= info.display_name %> </b>(<%= info.data %>)<%= link_to "Delete", info, :class=>"btn", :confirm => 'Are you sure?',:method => :delete %>
+			<br />
+			<%end%> </td>
+			<td class="span3"> <%@client.contact_infos.where(:nature => "Email",:client_id =>@client.id).each do |info| %> <b><%= info.display_name %></b> (<%= info.data %>)<%= link_to "Delete", info, :class=>"btn", :confirm => 'Are you sure?',:method => :delete %>
+			<br />
+			<%end%> </td>
+			<td> <%@client.contact_infos.where(:nature => "Date",:client_id =>@client.id).each do |info| %> <b><%= info.display_name %></b> (<%= info.data %>)<%= link_to "Delete", info, :class=>"btn", :confirm => 'Are you sure?',:method => :delete %>
+			<br />
+			<%end%> </td>
+			<td> <%@client.contact_infos.where(:nature => "Link",:client_id =>@client.id).each do |info| %> <b><%= info.display_name %></b> (<%= info.data %>)<%= link_to "Delete", info, :class=>"btn", :confirm => 'Are you sure?',:method => :delete %>
+			<br />
+			<%end%> </td>
+		</tr>
+	</table>
+	<hr />
+	<%= link_to 'Back', clients_path, :class => "btn" %>
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#opts").change(function() {		
+		if(($("#ap").html() != "") && ($("#opts").val()!='0')){
+				$('#sub').removeAttr('disabled');
+		}
+	})	
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$("#opts").click(function() {
+			if($("#opts").val() == ("Phone Number")) {
+				$("#ap").append('<div id="phn"><input type="hidden" name="contact_info[][nature]" value="Phone Number" ><select id ="phn" name="contact_info[][display_name]"><option>Personal</option><option >Home</option><option >Custom</option></select> <input type ="text" id="ad" name="contact_info[][data]"></input>' + '<a href="#" class="remove1" id="rm" >Remove</a></div>');
+			}
+			if($("#opts").val() == ("Address")) {
+				$("#ap").append('<div id= "add"><input type="hidden" name="contact_info[][nature]" value="Address" ><select id ="add" name ="contact_info[][display_name]"><option>Home Address</option><option >Work Address</option><option >Custom</option></select><textarea rows="2" cols="20" name="contact_info[][data]"></textarea>' + '<a href="#" class="remove2" id="rm" >Remove</a></div>');
+			}
+			if($("#opts").val() == ("Date")) {
+				$("#ap").append('<div id ="date"><input type="hidden" name="contact_info[][nature]" value="Date" ><select id ="date" name="contact_info[][display_name]"><option>Birthday</option><option >Anniversary</option><option >Custom</option></select> <input type ="text" name="contact_info[][data]" class="hasDatepicker1" >' + '<a href="#" class="remove3"  id="rm" >Remove</a></div>');
+				$(".hasDatepicker1").datetimepicker();
+			}
+			if($("#opts").val() == ("Email")) {
+				$("#ap").append('<div id ="email"><input type="hidden" name="contact_info[][nature]" value="Email" ><select id ="email" name="contact_info[][display_name]"><option>Home Email</option><option >Work Email</option><option >Custom Email</option></select> <input type ="text" name="contact_info[][data]"></input>' + '<a href="#" class="remove4" id="rm" >Remove</a></div>');
+			}
+			if($("#opts").val() == ("Link")) {
+				$("#ap").append('<div id="link"><input type="hidden" name="contact_info[][nature]" value="Link" ><select id ="link" name="contact_info[][display_name]"><option>Profle</option><option >Blog</option><option>Homepage</option><option>Custom</option></select> <input type ="text " name="contact_info[][data]"></input>' + '<a href="#" class="remove5" id="rm" >Remove</a></div>');
+			}
+		});
+		$('.remove1').live('click', function() {
+			$("#phn").remove();
+			if(($("#ap").html().trim() == "")){
+				$('#sub').attr('disabled','false');
+			}
+			return false;
+		});
+		$('.remove2').live('click', function() {
+			$("#add").remove();
+			if(($("#ap").html().trim() == "")){
+				$('#sub').attr('disabled','false');
+			}
+			return false;
+		});
+		$('.remove3').live('click', function() {
+			$("#date").remove();
+			if(($("#ap").html().trim() == "")){
+				$('#sub').attr('disabled','false');
+			}
+			return false;
+		});
+		$('.remove4').live('click', function() {
+			$("#email").remove();
+			if(($("#ap").html().trim() == "")){
+				$('#sub').attr('disabled','false');
+			}
+			return false;
+		});
+		$('#rm').live('click', function() {
+			$("#link").remove();
+			if(($("#ap").html().trim() == "")){
+				$('#sub').attr('disabled','false');
+			}
+			return false;
+		});
+		$(".hasDatepicker1").datetimepicker({
+			dateFormat : 'dd-mm-yy',
+			ampm : true
+		});
+	});
+
+</script>
+<h1>Add Information</h1>
+<select id="opts">
+	<option value = "0">Select Option</option>
+	<option value = "Phone Number">Phone Number</option>
+	<option value = "Address">Address</option>
+	<option value = "Date">Date</option>
+	<option value = "Email">Email</option>
+	<option value = "Link">Link</option>
+</select>
+<%= form_for :contact_infos, :url => :contact_infos do%>
+<%= hidden_field_tag('client_id',@client.id)%> <!-- <input type="hidden" name="client_info[client_id]" /> -->
+<div id="ap">
+</div>
+<div >
+	<input disabled="false" id="sub" class="btn primary" name="commit" type="submit" value="Add Information">
+	<a href="/clients" class="btn">Cancel</a>
+</div>
+<%end%> 

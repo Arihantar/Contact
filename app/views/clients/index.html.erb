@@ -1,0 +1,42 @@
+<div class="page-header">
+	<h1>Client <small>Show all Clients</small><b style="float: right"><%= link_to 'New Client', new_client_path ,:class=>"btn success "%></b></h1>
+</div>
+
+<!-- <fieldset>
+	<form action="/clients" method="get">
+		<table >
+			<thead>
+				<tr>
+					<th><b>Filter by Name</b></th>
+					
+				</tr>
+			</thead>
+			<tr>
+		
+				<td><%= select_tag 'client_id', options_from_collection_for_select(Client.all, 'id', 'fullname') %>
+				<%= submit_tag "Search",:class=>"btn secondary" , :name => nil %> </td>
+				
+			</tr>
+		</table>
+	</form>
+</fieldset> -->	
+
+<table class="tablesorter zebra-striped " id="myTable">
+	<thead>
+		<tr>
+			
+			<th>Name</th>
+		</tr>
+	</thead>
+	<% @clients.each do |client| %>
+	<tr>
+		<td><a href="<%= client_path(client) %>"><%= client.salutaion %><%= client.name %></a></td>
+		<td> <%= link_to 'Edit', edit_client_path(client), :class => "btn" %>
+		<%= link_to 'Destroy', client, :class => "btn danger", :confirm => 'Are you sure?', :method => :delete %> </td>
+	</tr>
+	<% end %>
+</table>
+<br />
+<b><%= link_to 'New Client', new_client_path ,:class=>"btn success "%></b>
+
+<br />

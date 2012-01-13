@@ -1,0 +1,29 @@
+<div id="header">
+	<h1>Sign In</h1>
+</div>
+<div class="span12">
+<%= form_for(resource, :url => session_path(resource_name)) do |f| %>
+
+<fieldset>
+	<div class="span4">
+		<div class="clearfix">
+			<%= f.label :email %>
+		
+		<div class="input">
+			<%= f.text_field :email %>
+		</div>
+		</div>
+		<div class="clearfix">
+			<%= f.label :password %>
+		
+		<div class="input">
+			<%= f.password_field :password %>
+		</div>
+		</div>
+</fieldset>
+<div class="input">
+<%= f.submit "Sign in", :class => "btn primary"%>
+</div>
+
+<% end %>
+</div>
