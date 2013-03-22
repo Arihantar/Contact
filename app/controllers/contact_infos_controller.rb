@@ -21,7 +21,7 @@ class ContactInfosController < ApplicationController
     @contact_info = ContactInfo.new
     respond_to do |format|
       format.html
-      format.json {render :json => @contact_info }
+      
     end
   end
 
@@ -52,10 +52,9 @@ class ContactInfosController < ApplicationController
     respond_to do |format|
       if @contact_info.update_attributes(params[:contact_info])
         format.html { redirect_to @contact_info, :notice => 'Contact Information successfully updated.' }
-        format.json { head :ok }
       else
         format.html { render :action => "edit" }
-        format.json { render :json => @contact_info.errors, :status => :unprocessable_entity }
+      
       end
     end
   end
@@ -66,7 +65,7 @@ class ContactInfosController < ApplicationController
     @contact_info.destroy
     respond_to do |format|
       format.html { redirect_to @client }
-      format.json { head :ok }
+      
     end
   end
 end

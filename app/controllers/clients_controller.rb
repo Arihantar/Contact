@@ -19,7 +19,7 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
     respond_to do |format|
       format.html
-      format.json {render :json => @client }
+      
     end
   end
 
@@ -27,7 +27,7 @@ class ClientsController < ApplicationController
     @client = Client.new
     respond_to do |format|
       format.html
-      format.json {render :json => @client }
+      
     end
   end
 

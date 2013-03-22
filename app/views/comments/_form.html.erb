@@ -1,0 +1,33 @@
+<%= form_for([@post, @post.comments.new], :validate => true,:html=>{:class=>'form-horizontal'} )  do |f|  %>
+ <% if @post.errors.any? %>
+   <div id="error_explanation">
+     <ul>
+     <% @post.errors.full_messages.each do |msg| %>
+       <li><%= msg %></li>
+     <% end %>
+     </ul>
+   </div>
+  <% end %>
+  <div class="control-group">
+    <label class="control-label" for="commenter">Commenter</label>
+    <div class="controls">
+    <%= f.text_field :commenter ,:validate => true%>
+  </div>
+  </div>
+  <div class="control-group">
+     <label class="control-label" for="body">Body</label>
+  <div class="controls">
+    <%= f.text_area :body, :validate => true, :rows=>'3' %>
+    </div>
+  </div>
+
+   <div class="control-group">
+    <div class="controls">
+      <label class="checkbox">
+        <input type="checkbox"> Remember me
+      </label>
+       <%= f.submit "Submit", :class=>'btn' %>
+    </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,41 @@
+<div class="page">
+	<h2 class="label">Listing Users</h2>
+
+	<table class="table table-striped">
+	  <tr>
+	    <th>First Name</th>
+	    <th>Last Name</th>
+	    <th>Email</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+
+	<% @users.each do |user| %>
+	  <tr>
+	    <td><%= user.first_name %></td>
+	    <td><%= user.last_name %></td>
+	    <td><%= user.email %></td>
+	    <td><%= link_to 'Show', user, :class=>"btn btn-success" %></td>
+	    <td><%= link_to 'Edit', edit_user_path(user), :class=>"btn btn-info" %></td>
+	    <td><%= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class=> "btn btn-danger" %></td>
+	  </tr>
+	<% end %>
+	</table>
+
+	<br />
+
+	<%= link_to 'New User', new_user_path, :class=>"btn btn-primary" %>
+
+	<%= link_to 'Xero Connect',  xero_new_xero_path, :class=>"btn btn-danger" %>
+
+	<%= link_to 'Get Clients',  get_clients_xero_path, :class=>"btn btn-warning" %>
+	<%= @a %>
+</div>
+
+<%unless @xero_client.nil?%>
+	<%@xero_client = Xeroizer::PublicApplication.new('RHEAGGF6GJJA2VOKZLTY6HNZ5NZY1F', 'PSGGP2D7VGOY1ROFDC7HVQRLFSYOCH')%>
+	<% contacts = @xero_client.Contact.all %>
+	<%= contacts%>
+	<%=debug params%>
+<%end%>

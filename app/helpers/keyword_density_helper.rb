@@ -1,0 +1,2 @@
+module KeywordDensityHelper
+end

@@ -1,0 +1,21 @@
+<%= js add_gritter(flash[:notice], :image => :notice, :title => "Pay attention!", :sticky => true) %>
+<%= js add_gritter(flash[:error], :image => :error, :title => "Pay attention!", :sticky => true) %>
+      
+
+<p>
+  <b>First Name:</b>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <b>Last Name:</b>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@user) %> |
+<%= link_to 'Back', posts_path %>

@@ -1,91 +1,41 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Spincrm</title>
-		<%= stylesheet_link_tag "application" %>
-		<%= javascript_include_tag "application" %>
-		<%= csrf_meta_tags %>
-		<script type="text/javascript">
-			$(function() {				
-				$("#datepic").datetimepicker();
-			});
+<head>
+  <title>Blog</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  
 
-		</script>
-		<style type="text/css">
-			label {
-				width: 10em;
-				float: left;
-			}
-			label.error {
-				float: none;
-				color: red;
-				padding-left: .5em;
-				vertical-align: top;
-			}
-			p {
-				clear: both;
-			}
-			.submit {
-				margin-left: 12em;
-			}
-			em {
-				font-weight: bold;
-				padding-right: 1em;
-				vertical-align: top;
-			}
-		</style>
-	</head>
-	<body>
-		
-		<div id="topbar-wrapper" style="z-index: 5;">
-			<div class="topbar" data-dropdown="dropdown">
-				<div class="topbar-inner">
-					<div class="container">
-						<h3><%= link_to "Home", :root%></h3>
-						<ul class="nav">
-							
-							<li>
-								<%= link_to "Show Clients", clients_path %>
-							</li>
-						</ul>
-						<ul class="nav secondary-nav">
-							<% if user_signed_in? %>
-							<li style="line-height: 38px">
-								<%= current_user.email %>.
-							</li>
-							<li>
-								<%= link_to "Sign Out", destroy_user_session_path, :method => 'delete' %>
-							</li>
-							<% else %>
-							<li>
-								<%= link_to "Sign in", new_user_session_path %>
-							</li>
-							<%end%>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="container">
-				<br>
-				
-				<% if flash[:alert] %>
-				<div class="alert-message error">
-				<p class="flash-error">
-					<%= flash[:alert] %>
-				</p>
-				<% end %>
-				</div>
-				
-				
-				<% if flash[:notice] %>
-				<div class="alert-message warning">
-				<p class="flash-notice">
-					<%= flash[:notice] %>
-				</p>
-				<% end %>
-				</div>
-
-				<%= yield %>
-			</div>
-		</div>
-	</body>
+  <%= csrf_meta_tags %>
+</head>
+<body style="background: #EEEEEE;">	
+  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container" style="">
+          
+          <%= link_to "Home", root_path, :class=>"brand" %>
+          
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <%= link_to "Blog", posts_path %>
+              </li>
+              <li class="">
+                <a href="/keyword_density/index">Keyword Density</a>
+              </li>
+              <li class="">
+                <%= link_to "User", users_path%>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class= "container">
+      <%= js add_gritter(flash[:notice], :image => :notice, :title => "Pay attention!", :sticky => true) %>
+      <%= js add_gritter(flash[:error], :image => :error, :title => "Pay attention!", :sticky => true) %>
+      
+      <%= yield %>
+    </div>
+</body>
 </html>

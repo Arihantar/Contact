@@ -1,9 +1,28 @@
-Contact::Application.routes.draw do
- 
-  devise_for :users
+Blog::Application.routes.draw do
+  
+  get "keyword_density/index"
 
-  resources :clients
-  resources :contact_infos
+  match "keyword_density/index", :to =>"keyword_density#index", :via =>:post
+
+  match 'xml', :to => 'posts#readxml'
+  resources :posts do
+    resources :comments
+  end
+  
+  match 'xero_session/create', :to => 'XeroSession#create'
+  resources :users
+  resource :xero do
+    get 'xero_new',  :to => 'XeroSession#new'
+    get 'get_clients', :to => 'XeroSession#sample'
+    # post 'get_clients', :to => 'XeroSession#create'
+    get  'oauth', :on => :collection
+    post 'save',  :on => :collection
+    get  'mapping',  :on => :collection
+    post 'mapping',  :on => :collection
+    get  'status',  :on => :collection
+  end
+
+  #get "home/index"
   root :to => "home#index"
 
   # The priority is based upon order of creation:
@@ -61,5 +80,5 @@ Contact::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  # match ':controller(/:action(/:id))(.:format)'
 end

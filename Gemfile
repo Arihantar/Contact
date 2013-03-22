@@ -1,42 +1,41 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
 
 gem 'json'
 
-gem 'devise'
-
-gem 'will_paginate'
-
-gem 'twitter-bootstrap-rails'
-
-gem 'less'
-  
-gem 'less-rails'
-
-gem 'railties'
-
-gem 'dynamic_form'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', :platforms => :ruby
+
   gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
-
+gem "nokogiri", "~> 1.5.5"
+gem 'twitter-bootstrap-rails'  
+gem 'jquery-datatables-rails'
+gem 'client_side_validations'
+gem 'gritter', "1.0.3"
+gem 'mechanize' 
+gem 'xeroizer'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-# Use unicorn as the web server
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
+
+# Use unicorn as the app server
 # gem 'unicorn'
 
 # Deploy with Capistrano
@@ -44,4 +43,3 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug'
-

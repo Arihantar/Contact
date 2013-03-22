@@ -1,0 +1,27 @@
+<div class="page">
+	<h3>Keyword Density Tool</h3>
+	<form name="input" action="/keyword_density/index" method="post">
+		<div>
+			<label class="control-label" for="url">URL</label>
+		    <input class= "xlarge" type='text' name= 'url' >
+		</div>
+		<div>
+			<label class="control-label" for="ashram_name">Minimum Occurance</label>
+		    <input class= "xlarge" type='text' name = 'min_occurence' >
+		</div>
+		<div>
+			<label class="control-label" for="ashram_name">Minimum Word Length</label>
+		    <input class= "xlarge" type='text' name = 'min_word_length' >
+		</div>
+		
+		<button type="submit" value="Submit" class="btn btn-info">
+  			<i class=" icon-search icon-white"></i> Find
+		</button>
+	</form>
+	<%= debug @result %>
+</div>
+
+
+<script>
+	// $('div :input').fancyInput();
+</script>
